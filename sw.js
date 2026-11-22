@@ -1,7 +1,56 @@
 'use strict';
 
-const CACHE_NAME = 'mashinki3d-offline-v1';
+const CACHE_NAME = 'mashinki3d-offline-v2';
 const BASE_URL = new URL('./', self.location.href);
+const TRACKS = ['./track1.mp3','./track2.mp3','./track3.mp3','./track4.mp3','./track5.mp3','./track6.mp3'];
+
+async function cacheTracks() {
+  const cache = await caches.open(CACHE_NAME);
+  for (const t of TRACKS) {
+    const url = new URL(t, BASE_URL).href;
+    try {
+      if (await cache.match(url)) continue;
+      const res = await fetch(url);
+      if (res && res.ok && res.status === 200) await cache.put(url, res);
+    } catch (err) { /* offline or temporary error: try again next time */ }
+  }
+}
+
+// Audio asks for byte ranges: serve them from the cached full file (206), otherwise caching breaks seeking/playback.
+async function trackResponse(req) {
+  const cache = await caches.open(CACHE_NAME);
+  const key = req.url.split('#')[0];
+  let full = await cache.match(key);
+  if (!full) {
+    try {
+      const res = await fetch(key);
+      if (!res.ok || res.status !== 200) return res;
+      await cache.put(key, res.clone());
+      full = res;
+    } catch (err) {
+      try { return await fetch(req); } catch (e) { return new Response('', { status: 504 }); }
+    }
+  }
+  const range = req.headers.get('range');
+  if (!range) return full;
+  const buf = await full.arrayBuffer();
+  const size = buf.byteLength;
+  const m = /bytes=(\d*)-(\d*)/.exec(range);
+  let a = 0, b = size - 1;
+  if (m) {
+    if (m[1] !== '') { a = +m[1]; if (m[2] !== '') b = +m[2]; }
+    else if (m[2] !== '') { a = Math.max(0, size - +m[2]); }
+  }
+  b = Math.min(b, size - 1);
+  if (a > b) return new Response(null, { status: 416, headers: { 'Content-Range': 'bytes */' + size } });
+  return new Response(buf.slice(a, b + 1), { status: 206, headers: {
+    'Content-Type': 'audio/mpeg', 'Content-Range': 'bytes ' + a + '-' + b + '/' + size,
+    'Content-Length': String(b - a + 1), 'Accept-Ranges': 'bytes' } });
+}
+
+self.addEventListener('message', event => {
+  if (event.data === 'precache') event.waitUntil(cacheTracks());
+});
 
 const PRECACHE_URLS = [
   './',
@@ -85,6 +134,7 @@ self.addEventListener('fetch', event => {
     'fonts.googleapis.com', 'fonts.gstatic.com'
   ].includes(url.hostname);
   if (!sameOrigin && !gameCDN) return;
+  if (sameOrigin && /\/track[1-6]\.mp3$/.test(url.pathname)) { event.respondWith(trackResponse(req)); return; }
 
   if (req.mode === 'navigate') {
     event.respondWith(networkFirst(

@@ -157,13 +157,24 @@ button.tile:hover,button.tile:active{transform:translateY(calc(var(--u)*-2)) sca
 #hud button{pointer-events:auto}
 #spo{right:calc(176px + env(safe-area-inset-right,0px));bottom:14px;width:calc(var(--u)*22);height:calc(var(--u)*22)}
 #nbar{right:calc(176px + env(safe-area-inset-right,0px));bottom:calc(20px + var(--u)*22);width:calc(var(--u)*22)}
+.tile[data-i="⚡"]{padding-top:calc(var(--u)*14)}.tile[data-i="⚡"]::before{font-size:calc(var(--u)*8.5);top:calc(var(--u)*2.5)}
+#verb{position:absolute;right:calc(var(--u)*3 + env(safe-area-inset-right,0px));bottom:calc(var(--u)*2.5);z-index:2;pointer-events:auto;font-family:"Russo One",Impact,sans-serif;font-size:calc(var(--u)*3);color:#ffd9a0;background:rgba(18,18,20,.85);border:0;border-left:calc(var(--u)*.8) solid #FF9900;padding:calc(var(--u)*1) calc(var(--u)*3)}
+#pn{z-index:12}#pn .card{background:linear-gradient(180deg,#1f2024,#111215);border:calc(var(--u)*.7) solid #FF9900;box-shadow:inset 0 0 0 calc(var(--u)*.4) #5a3a00;max-height:90%;overflow-y:auto;touch-action:pan-y;text-align:left;width:calc(var(--u)*100)}
+#pn h2{color:#FF9900;text-align:center;margin:0 0 calc(var(--u)*2)}#pn ul{list-style:none;margin:0 0 calc(var(--u)*3);padding:0}
+#pn li{color:#f2e6cf;font-size:calc(var(--u)*3.6);padding:calc(var(--u)*1.2) 0 calc(var(--u)*1.2) calc(var(--u)*4);border-bottom:1px solid rgba(255,153,0,.25);position:relative}
+#pn li::before{content:"▸";position:absolute;left:0;color:#FF9900}#pn .go{display:block;margin:0 auto}
+#set .row{font-size:calc(var(--u)*4.2);margin-bottom:calc(var(--u)*3)}#set .chip{font-size:calc(var(--u)*4.2);padding:calc(var(--u)*1.6) calc(var(--u)*3.2)}
+#set input[type=range]{width:calc(var(--u)*52);height:calc(var(--u)*5)}
+#whl{display:none;position:absolute;left:calc(var(--u)*4 + env(safe-area-inset-left,0px));bottom:max(4px,calc(var(--u)*10 - 40px));width:124px;height:124px;pointer-events:auto;touch-action:none}
+#whl svg{width:100%;height:100%;stroke:#fff;fill:none;stroke-width:5;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(0,0,0,.7));opacity:.8}
+#pad.wheel #whl{display:block}#pad.wheel #lft,#pad.wheel #rgt,#pad.tilt #lft,#pad.tilt #rgt{display:none}
 </style>
 </head>
 <body>
 <div id="stage">
-  <div id="grade"></div><div id="sfx"></div><div id="sbfx"></div><div id="hud"><span id="sc"></span><span id="spd"></span><span id="co"></span><span style="display:flex;gap:calc(var(--u)*2)"><button id="mbtn" class="hide" aria-label="Пауза / меню"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg></button><button id="cbtn" class="hide" aria-label="Камера"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="12" height="10" rx="2"/><path d="M15 11l6-3v8l-6-3"/></svg></button><button id="phb" class="hide" aria-label="Телефон"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></button><button id="rad" aria-label="Следующий трек"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8l10-4"/><circle cx="9" cy="14" r="2.5"/><path d="M15 12h3M15 16h3"/></svg></button><button id="snd" aria-label="Звук"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/><path class="sl" d="M4 4l16 16"/></svg></button><button id="gear" aria-label="Настройки"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></button></span></div>
+  <div id="grade"></div><div id="sfx"></div><div id="sbfx"></div><div id="hud"><span id="sc"></span><span id="spd"></span><span id="co"></span><span style="display:flex;gap:calc(var(--u)*2)"><button id="mbtn" class="hide" aria-label="Пауза / меню"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg></button><button id="cbtn" class="hide" aria-label="Камера"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="12" height="10" rx="2"/><path d="M15 11l6-3v8l-6-3"/></svg></button><button id="phb" class="hide" aria-label="Телефон"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></button><button id="rad" aria-label="Следующий трек"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l9 7-9 7zM18 5v14"/></svg></button><button id="snd" aria-label="Звук"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/><path class="sl" d="M4 4l16 16"/></svg></button><button id="gear" aria-label="Настройки"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg></button></span></div>
   <div id="slip"></div><div id="iph"><div id="phS"><span id="phR">12:00</span><span>▂▄▆ 📶</span></div><div id="phT">12:00</div><div id="phD">ВРЕМЯ В ИГРЕ</div><div id="phB"></div><button id="phX" aria-label="Закрыть"></button></div><div id="toast" class="hide"></div><div id="wanted"></div><div id="pbar" class="hide"><i id="pf"></i><span id="pl"></span></div><div id="nbar" class="hide"><i id="nfill"></i></div><canvas id="mm" class="hide" width="200" height="200"></canvas><canvas id="spo" class="hide" width="300" height="300"></canvas><div id="fps" style="display:none"></div>
-  <div id="pad" class="hide">
+  <div id="pad" class="hide"><div id="whl"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42"/><circle cx="50" cy="50" r="9"/><path d="M8 50h33M59 50h33M50 59v33"/></svg></div>
     <button class="pb" id="lft" aria-label="Влево"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="pb" id="rgt" aria-label="Вправо"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     <button class="pb" id="hbk" aria-label="Ручник"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.5"/><path d="M12 9.5v3.5"/><circle cx="12" cy="15.2" r=".7" fill="#fff"/><path d="M5 8a8 8 0 000 8M19 8a8 8 0 010 8"/></svg></button>
     <button class="pb" id="brk" aria-label="Тормоз"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/></svg></button>
@@ -171,7 +182,7 @@ button.tile:hover,button.tile:active{transform:translateY(calc(var(--u)*-2)) sca
     <button class="pb" id="nit" aria-label="Нитро"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/></svg></button>
     <button class="pb" id="sbb" aria-label="Speedbreaker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10M7 21h10"/><path d="M8 3v3l4 6-4 6v3M16 3v3l-4 6 4 6v3"/></svg></button>
   </div>
-  <div id="start" class="ov">
+  <div id="start" class="ov"><button id="verb"></button>
     <div class="card">
       <h1>Машинки 3D</h1>
       <p id="rec"></p>
@@ -179,7 +190,7 @@ button.tile:hover,button.tile:active{transform:translateY(calc(var(--u)*-2)) sca
       <button class="tile" id="owb" data-i="🌆"><span>Свободная езда</span></button>
       <div class="tile" data-i="⚡"><span>Быстрая гонка / Погоня</span><div class="mrow"><button class="mb" id="spr">Спринт</button><button class="mb" id="pur">Погоня</button><button class="mb" id="play">Бесконечный</button></div></div>
       <button class="tile" id="gar" data-i="🔧"><span>Гараж и тюнинг</span></button>
-      <button class="tile" id="stb" data-i="⚙️"><span>Настройки и EA Trax</span></button>
+      <button class="tile" id="stb" data-i="⚙️"><span>Настройки</span></button>
     </div>
   </div>
   <div id="garage" class="hide">
@@ -195,6 +206,7 @@ button.tile:hover,button.tile:active{transform:translateY(calc(var(--u)*-2)) sca
   <div id="bl" class="ov hide"><div class="hd"><h1>Blacklist</h1><div id="blw"></div><button class="go alt" id="blx" style="min-width:0">Назад</button></div><div id="bll"></div></div>
   <div id="vic" class="ov hide"><div class="card"><h2>Победа над боссом</h2><p id="vt"></p><div class="tokens" id="vk"></div></div></div>
   <div id="set" class="ov hide"><div class="card"><h2>Настройки</h2><div id="setrows"></div><button class="go" id="setok">Готово</button></div></div>
+  <div id="pn" class="ov hide"><div class="card"><h2 id="pnh"></h2><ul id="pnl"></ul><button class="go" id="pnx">Круто</button></div></div>
   <div id="trax"><i>♪</i><div><em>EA TRAX</em><b id="trt"></b><small id="tra"></small></div></div>
   <div id="sfo" class="ov hide"><h1>ВЫ УШЛИ ОТ ПОГОНИ!</h1><p>Машина отремонтирована</p></div>
   <div id="sfm" class="ov hide"><div class="card"><h2>Укрытие</h2><button class="go" id="sfc">Следующая машина</button><button class="go alt" id="sfg">Гараж и тюнинг</button><button class="go" id="sfx">Выехать</button></div></div>
@@ -382,7 +394,7 @@ function fx(dt,dx,sp){
 }
 var ts=1,tk=1,sb=60,sbOn=false,sbNear=0,rdtG=.016,rcv=0,SH=[],sfH=null,sfA=0,sfLock=false,sfBlk=false,fromSH=false,lastPc=-1;
 var cam=0,paused=false,lk=false,rk=false,ow=false,owDx=0,oh=0,opx=0,opz=0,ovx=0,ovz=0,oy=0,ovy=0,air=false,owT=0,slip=0,pq=1,fpsT=0,fpsC=0,S=60,city=null,cols=[],ramps=[],tcars=[];
-var PRES=[{pr:.75,sh:0,bl:0,pt:0},{pr:1,sh:0,bl:1,pt:1},{pr:1.5,sh:1,bl:1,pt:1}],
+var PRES=[{lv:0,pr:.75,sh:0,bl:0,pt:0},{lv:1,pr:1,sh:0,bl:1,pt:1},{lv:2,pr:1.5,sh:1,bl:1,pt:1}],
  ROWS=[['fit','Экран',['На весь экран','16:9'],[1,0]],['pr','Разрешение',['0.75×','1×','1.5×','2×'],[.75,1,1.5,2]],['sh','Тени',['Выкл','Вкл'],[0,1]],['bl','Свечение и лучи',['Выкл','Вкл'],[0,1]],['pt','Отражения и частицы',['Низко','Высоко'],[0,1]],['fps','Счётчик FPS',['Выкл','Вкл'],[0,1]],['br','Яркость',['Низкая','Средняя','Высокая'],[.65,.8,1]]];
 sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=sun.shadow.camera.bottom=-50;sun.shadow.camera.right=sun.shadow.camera.top=50;sun.shadow.camera.far=140;sun.shadow.bias=-.0006;road.receiveShadow=ground.receiveShadow=true;
 function applyGfx(){gfx.br=gfx.br||.8;if(brU)brU.value=gfx.br;renderer.toneMappingExposure=gfx.br*1.1;
@@ -392,12 +404,15 @@ function applyGfx(){gfx.br=gfx.br||.8;if(brU)brU.value=gfx.br;renderer.toneMappi
 }
 function renderSet(){
  var s=$('setrows');s.innerHTML='';
- function chip(r,n,on,fn){var b=document.createElement('button');b.className='chip';b.textContent=n;if(on!==null)b.setAttribute('aria-pressed',on);b.onclick=fn;r.appendChild(b);}
- var r0=document.createElement('div');r0.className='row';r0.innerHTML='<span>Пресет</span>';
- ['Низкая','Средняя','Высокая'].forEach(function(n,j){chip(r0,n,null,function(){Object.assign(gfx,PRES[j]);applyGfx();renderSet();});});s.appendChild(r0);
- ROWS.forEach(function(R){var r=document.createElement('div');r.className='row';r.innerHTML='<span>'+R[1]+'</span>';
-  R[2].forEach(function(n,j){chip(r,n,gfx[R[0]]===R[3][j],function(){gfx[R[0]]=R[3][j];applyGfx();renderSet();});});s.appendChild(r);});
- audioRows(s,chip);
+ function row(l){var r=document.createElement('div');r.className='row';r.innerHTML='<span>'+l+'</span>';s.appendChild(r);return r;}
+ function chip(r,n,on,fn){var b=document.createElement('button');b.className='chip';b.textContent=n;b.setAttribute('aria-pressed',on);b.onclick=fn;r.appendChild(b);}
+ var lv=gfx.lv==null?1:gfx.lv,r0=row('Графика');
+ ['НИЗКАЯ','СРЕДНЯЯ','ВЫСОКАЯ'].forEach(function(n,j){chip(r0,n,lv===j,function(){Object.assign(gfx,PRES[j]);applyGfx();renderSet();});});
+ var r1=row('Громкость музыки');r1.insertAdjacentHTML('beforeend','<input type="range" min="0" max="100" value="'+Math.round(MU.v*100)+'">');
+ r1.lastChild.oninput=function(){MU.v=this.value/100;mVol();mSave();};
+ var r2=row('Громкость звуков');r2.insertAdjacentHTML('beforeend','<input type="range" min="0" max="100" value="'+Math.round(SV*100)+'">');
+ r2.lastChild.oninput=function(){SV=this.value/100;try{localStorage.setItem('mashinki3d-sv',SV);}catch(e){}if(master)master.gain.value=muted?0:.6*SV;};
+ var r3=row('Управление');[['btn','Кнопки GTA SA'],['wheel','Руль'],['tilt','Наклон']].forEach(function(o){chip(r3,o[1],ctl===o[0],function(){setCtl(o[0]);renderSet();});});
 }
 function cycleCam(){cam=(cam+1)%4;toast(['Сзади','Далеко','Капот','Бампер'][cam]);}
 var indM=Lm(0x8a7f72);
@@ -673,7 +688,7 @@ var PM=[6,6,1,1,2,5],pt=document.createElement('canvas');pt.width=128;pt.height=
 function startOW(){startGame();$('phb').classList.remove('hide');sfLock=true;ow=true;mode=null;buildCity();gh=0;oh=0;opx=0;opz=90;$('co').textContent='★ 0';ovx=ovz=0;oy=ovy=0;air=false;speed=0;player.position.set(0,0,0);toast('Открытый мир');}
 var mmx=$('mm').getContext('2d');
 function owStep(dt){tlUpd();leafUpd(dt);skyUpd();if(gAuto)gT=(gT+dt/30)%24;todApply();if(slowT>0){slowT-=dt;dt*=.4;}
- owT+=dt;if(rcv>0)rcv-=dt;var D=CARS[sel.car],vmax=(36+D.st[0]*5)*(1+eco.perf*.04),acc=(8+D.st[1]*3)*slipM,st=stSm(dt,(rk?1:0)-(lk?1:0));owDx=st*1.5;
+ owT+=dt;if(rcv>0)rcv-=dt;var D=CARS[sel.car],vmax=(36+D.st[0]*5)*(1+eco.perf*.04),acc=(8+D.st[1]*3)*slipM,st=stSm(dt,steerOv!==null?steerOv:(rk?1:0)-(lk?1:0));owDx=st*1.5;
  nitStep(dt,6*(slipM>1?2.5:1));
  oh-=st*(2.1-Math.min(1,speed/50)*.9)*Math.min(1,speed/9)*dt*(1+(1-ts)*2.2);
  var F=[-Math.sin(oh),-Math.cos(oh)],R=[Math.cos(oh),-Math.sin(oh)],vf=ovx*F[0]+ovz*F[1],vl=ovx*R[0]+ovz*R[1],vm=vmax*(nitOn?1.3:1);
@@ -718,7 +733,7 @@ function owStep(dt){tlUpd();leafUpd(dt);skyUpd();if(gAuto)gT=(gT+dt/30)%24;todAp
 }
 var refl=null,mode=null,world=[ground,road,startLine,arch].concat(dashes,curbs,trees,rails,lamps,blds);
 function setMode(w){if(mode===w)return;mode=w;wh.visible=w;world.forEach(function(o){o.visible=!w&&!ow;});if(city)city.visible=ow&&!w;
- scene.background.set(w?0x20150b:ow?MAPS[mapId].sky:0xf0c48a);scene.fog.color.set(w?0x3a2814:ow?MAPS[mapId].sky:0xf0c48a);scene.fog.near=w?10:ow?MAPS[mapId].fn:40;scene.fog.far=w?70:ow?MAPS[mapId].fog:130;
+ scene.background.set(w?0x20150b:ow?MAPS[mapId].sky:0xf0c48a);scene.fog.color.set(w?0x3a2814:ow?MAPS[mapId].sky:0xf0c48a);scene.fog.near=w?10:ow?MAPS[mapId].fn*ddk():40;scene.fog.far=w?70:ow?MAPS[mapId].fog*ddk():130;
  camera.fov=w?66:60;camera.updateProjectionMatrix();if(refl)refl.visible=w&&!!gfx.pt;}
 // cars
 var glassM=Lm(0xcfe9ff),tireM=Lm(0x1c2236),lightM=new THREE.MeshBasicMaterial({color:0xfff6b0}),lightG=new THREE.BoxGeometry(.4,.2,.1);
@@ -762,7 +777,7 @@ var SND={ign:'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjE
 function initAudio(){
   if(AC)return;
   try{
-    AC=new (window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=muted?0:.6;master.connect(AC.destination);
+    AC=new (window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=muted?0:.6*SV;master.connect(AC.destination);
     eng=AC.createOscillator();eng.type='sawtooth';eng.frequency.value=70;
     var f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=380;filt=f;
     engG=AC.createGain();engG.gain.value=0;eng.connect(f);f.connect(engG);engG.connect(master);eng.start();
@@ -816,7 +831,7 @@ function engineSnd(on,sk){
 }
 function silence(){if(sirG)sirG.gain.value=0;if(engG)engG.gain.value=0;if(smpG)smpG.gain.value=0;}
 function engOff(){if(!AC)return;var t=AC.currentTime;if(sirG)sirG.gain.setTargetAtTime(0,t,.05);if(engG)engG.gain.setTargetAtTime(0,t,.05);if(smpG)smpG.gain.setTargetAtTime(0,t,.05);}
-$('snd').onclick=function(){muted=!muted;this.classList.toggle('off',muted);if(master)master.gain.value=muted?0:.6;mus.muted=muted;};
+$('snd').onclick=function(){muted=!muted;this.classList.toggle('off',muted);if(master)master.gain.value=muted?0:.6*SV;mus.muted=muted;};
 
 // game
 var enemies=[],stars=[],speed=24,dist=0,got=0,spawnT=0,shake=0,gas=false,brk=false,nextAt=250,lap=0,ga=0,tt,ES=16;
@@ -1110,9 +1125,9 @@ function mTick(){
  }else if(mg.on)gStop();
 }
 // ===== EA Trax =====
-var TRK=[{t:'Do Ya Thang',a:'P$C'},{t:'Nine Thou (Superstars Remix)',a:'Styles of Beyond'},{t:'I Am Rock',a:'Rock'},{t:'In A Hood Near You',a:'Suni Clay'},{t:"Let's Move",a:'The Perceptionists'},{t:'B-Side Wins Again',a:'DJ Spooky & Dave Lombardo'}].map(function(o,j){o.f='track'+(j+1)+'.mp3';return o;}),
- MU={v:.7,m:'all',on:[1,1,1,1,1,1,1,1,1,1]},mus=new Audio(),mi=-1,mOK=false,mErr=0,trT,lastMk=-1;
-TRK=GENS.concat(TRK);try{var mq=JSON.parse(localStorage.getItem('mashinki3d-mus'));if(mq&&mq.on&&mq.on.length===10)Object.assign(MU,mq);}catch(e){}
+var TRK=[{t:'Do Ya Thang',a:'P$C'},{t:'Nine Thou (Superstars Remix)',a:'Styles of Beyond'},{t:'I Am Rock',a:'Rock'},{t:'In A Hood Near You',a:'Suni Clay'},{t:"Let's Move",a:'The Perceptionists'},{t:'B-Side Wins Again',a:'DJ Spooky & Dave Lombardo'}].map(function(o,j){o.f='./track'+(j+1)+'.mp3';return o;}),
+ MU={v:.7,m:'all',on:[1,1,1,1,1,1]},mus=new Audio(),mi=-1,mOK=false,mErr=0,trT,lastMk=-1;
+try{var mq=JSON.parse(localStorage.getItem('mashinki3d-mus'));if(mq&&mq.on&&mq.on.length===6)Object.assign(MU,mq);}catch(e){}MU.m='all';MU.on=[1,1,1,1,1,1];
 mus.preload='auto';mus.preservesPitch=mus.mozPreservesPitch=mus.webkitPreservesPitch=false;
 function mSave(){try{localStorage.setItem('mashinki3d-mus',JSON.stringify(MU));}catch(e){}}
 function mVol0(){var k=Math.min(1,Math.max(0,(ts-.33)/.67));mus.volume=Math.max(0,Math.min(1,MU.v*(.5+.5*k)));mus.muted=muted;}
@@ -1245,15 +1260,56 @@ addEventListener('pointerdown',function(){initAudio();mOK=true;mTick();},{once:t
 camera.far=520;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;renderer.shadowMap.type=THREE.PCFSoftShadowMap;if(!localStorage.getItem('mashinki3d-gfx')){gfx.sh=1;}sun.color.set(0xffa95a);sun.intensity=1.3;
 bm.forEach(function(m){m.emissive=new THREE.Color(0x4a2d12);m.emissiveMap=winT;});
 phoneInit();applyGfx();showMenu();requestAnimationFrame(frame);
+// ===== v1.1: patch notes, volume, control layouts =====
+const GAME_VERSION = "1.1";
+const PATCH_NOTES = [
+ "Легендарный саундтрек EA Trax: 6 треков прямо в игре, кнопка ⏭ переключает песню",
+ "Упрощённые настройки: графика (низкая / средняя / высокая), громкость музыки и звуков, раскладка управления",
+ "Новое меню и управление в стиле GTA SA Mobile",
+ "Секретное НЛО в лесу ночью",
+ "Боевой танк Rhino с пушкой",
+ "Взрывы машин",
+ "Офлайн-режим с автообновлением"
+];
+function showPN(){$('pnh').textContent='ЧТО НОВОГО В v'+GAME_VERSION;$('pnl').innerHTML=PATCH_NOTES.map(function(t){return '<li>'+t+'</li>';}).join('');$('pn').classList.remove('hide');}
+$('verb').textContent='v'+GAME_VERSION+' • Обновления';$('verb').onclick=showPN;
+$('pnx').onclick=function(){$('pn').classList.add('hide');try{localStorage.setItem('last_seen_version',GAME_VERSION);}catch(e){}};
+try{if(localStorage.getItem('last_seen_version')!==GAME_VERSION)showPN();}catch(e){showPN();}
+var SV=1;try{var sv0=localStorage.getItem('mashinki3d-sv');if(sv0!==null)SV=Math.max(0,Math.min(1,+sv0||0));}catch(e){}
+function ddk(){return [.55,.8,1][gfx.lv==null?1:gfx.lv];}
+var steerOv=null,ctl='btn',stLatch=0,tiltH=null,wA=0;
+try{ctl=localStorage.getItem('mashinki3d-ctl')||'btn';}catch(e){}
+function setSteer(v){steerOv=v;if(v>.5&&stLatch<=0){stLatch=1;move(1);}else if(v<-.5&&stLatch>=0){stLatch=-1;move(-1);}else if(Math.abs(v)<.2)stLatch=0;}
+function setCtl(c){
+ ctl=c;try{localStorage.setItem('mashinki3d-ctl',c);}catch(e){}
+ var p=$('pad');p.classList.toggle('wheel',c==='wheel');p.classList.toggle('tilt',c==='tilt');
+ steerOv=c==='btn'?null:0;stLatch=0;wA=0;$('whl').style.transform='';
+ if(tiltH){removeEventListener('devicemotion',tiltH);tiltH=null;}
+ if(c==='tilt'){
+  var go=function(){tiltH=function(e){var a=e.accelerationIncludingGravity;if(!a||a.x==null)return;var an=(screen.orientation&&screen.orientation.angle)||window.orientation||0,k=/iPhone|iPad/.test(navigator.userAgent)?-1:1,v=(an===90||an===-270)?a.y:(an===270||an===-90)?-a.y:an===180?a.x:-a.x;v=v*k/4.5;if(Math.abs(v)<.07)v=0;setSteer(Math.max(-1,Math.min(1,v)));};addEventListener('devicemotion',tiltH);};
+  try{if(window.DeviceMotionEvent&&DeviceMotionEvent.requestPermission)DeviceMotionEvent.requestPermission().then(function(r){if(r==='granted')go();else toast('Нет доступа к датчикам');}).catch(function(){});else go();}catch(e){go();}
+ }
+}
+(function(){var w=$('whl'),pid=null,cx=0,cy=0;
+ function ang(e){return Math.atan2(e.clientX-cx,-(e.clientY-cy))*57.3;}
+ function set(a){wA=Math.max(-100,Math.min(100,a));w.style.transform='rotate('+wA+'deg)';setSteer(Math.max(-1,Math.min(1,wA/70)));}
+ w.addEventListener('pointerdown',function(e){e.preventDefault();pid=e.pointerId;try{w.setPointerCapture(pid);}catch(x){}var r=w.getBoundingClientRect();cx=r.left+r.width/2;cy=r.top+r.height/2;w.style.transition='none';set(ang(e));});
+ w.addEventListener('pointermove',function(e){if(e.pointerId===pid)set(ang(e));});
+ function up(e){if(e.pointerId!==pid)return;pid=null;w.style.transition='transform .18s';set(0);}
+ w.addEventListener('pointerup',up);w.addEventListener('pointercancel',up);
+})();
+setCtl(ctl);
 })();
 </script>
 
 <script>
+
 if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('controllerchange',function(){var c=navigator.serviceWorker.controller;if(c)c.postMessage('precache');});
   window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./sw.js')
+    fetch('./sw.js',{method:'HEAD'}).then(function(r){if(!r.ok)throw 0;return navigator.serviceWorker.register('./sw.js');}).then(function(){return navigator.serviceWorker.ready;}).then(function(r){if(r.active)r.active.postMessage('precache');})
       .catch(function (error) {
-        console.warn('Не удалось зарегистрировать офлайн-режим:', error);
+        if(error)console.warn('Не удалось зарегистрировать офлайн-режим:', error);
       });
   });
 }
