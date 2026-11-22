@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'mashinki3d-offline-v2';
+const CACHE_NAME = 'mashinki3d-offline-v3';
 const BASE_URL = new URL('./', self.location.href);
 const TRACKS = ['./track1.mp3','./track2.mp3','./track3.mp3','./track4.mp3','./track5.mp3','./track6.mp3'];
 
